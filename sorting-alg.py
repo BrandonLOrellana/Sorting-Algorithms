@@ -23,6 +23,17 @@ def bubble_sort(array):
                 arr[j], arr[j+1] = arr[j+1], arr[j] 
     return arr
 
+def selection_sort(array):
+    arr = array[:]
+    n   = len(arr)-1
+    for i in range(n):
+        min = i
+        for j in range(i+1, n+1):
+            if arr[j] < arr[min]:
+                min = j
+        arr[min], arr[i] = arr[i], arr[min]
+    return arr
+
 def insertion_sort(array):
     arr = array[:]
     n   = len(arr)
@@ -51,12 +62,16 @@ def quick_sort(arr):
 
 def test_algs():
     algs = {
-        'bubble_sort': None, 
+        'bubble_sort':    None, 
+        'selection_sort': None,
         'insertion_sort': None,
-        'quick_sort': None
+        'quick_sort':     None
     }
     arr = randomize(list(range(1000)))
     algs['bubble_sort'] = is_sorted(bubble_sort(arr))
+
+    arr = randomize(list(range(1000)))
+    algs['selection_sort'] = is_sorted(selection_sort(arr))
     
     arr = randomize(list(range(1000)))
     algs['insertion_sort'] = is_sorted(insertion_sort(arr))
