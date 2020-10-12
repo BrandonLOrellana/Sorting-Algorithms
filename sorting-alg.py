@@ -60,6 +60,35 @@ def quick_sort(arr):
             greater.append(num)
     return quick_sort(less) + equal + quick_sort(greater)
 
+def merge_sort(arr  ):
+    if len(arr) >1: 
+        pivot = len(arr)//2
+        left  = arr[:pivot]
+        right = arr[pivot:]
+        merge_sort(left)
+        merge_sort(right)
+        i, j, k = 0, 0, 0
+
+        while i < len(left) and j < len(right): 
+            if left[i] < right[j]: 
+                arr[k] = left[i] 
+                i+= 1
+            else: 
+                arr[k] = right[j] 
+                j+= 1
+            k+= 1
+
+        while i < len(left): 
+            arr[k] = left[i] 
+            i+= 1
+            k+= 1
+          
+        while j < len(right): 
+            arr[k] = right[j] 
+            j+= 1
+            k+= 1
+    return arr
+
 def test_algs():
     algs = {
         'bubble_sort':    None, 
@@ -78,6 +107,9 @@ def test_algs():
 
     arr = randomize(list(range(1000)))
     algs['quick_sort'] = is_sorted(quick_sort(arr))
+
+    arr = randomize(list(range(1000)))
+    algs['merge_sort'] = is_sorted(merge_sort(arr))
     
     return algs
 
